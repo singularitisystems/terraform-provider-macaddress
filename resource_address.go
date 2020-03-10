@@ -38,12 +38,12 @@ func resourceAddressCreate(d *schema.ResourceData, m interface{}) error {
 	prefix := d.Get("prefix").([]int)
 
 	if len(prefix) > MAC_ADDRESS_LENGTH {
-		return errwrap.Wrapf("error generating random mac address: prefix is too large (> {{MAC_ADDRESS_LENGTH}})", MAC_ADDRESS_LENGTH)
+		return errwrap.Wrapf("error generating random mac address: prefix is too large")
 	}
 
 	for index, val := range prefix {
 		if val > 255 {
-			return errwarp.Wrapf("error generating random mac address: prefix segment must be in the range [0,256)")
+			return errwrap.Wrapf("error generating random mac address: prefix segment must be in the range [0,256)")
 		}
 		buf[index] = byte(val)
 	}
