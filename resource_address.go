@@ -24,8 +24,10 @@ func resourceAddress() *schema.Resource {
 				Type:     schema.TypeList,
 				Elem: &schema.Schema{Type: schema.TypeInt},
 				Default: []int{},
-				Required: false}}
+				Required: false
+			}
 		}
+	}
 }
 
 const MAC_ADDRESS_LENGTH = 6
