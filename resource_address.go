@@ -20,10 +20,6 @@ func resourceAddress() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"prefix": &schema.Schema{
-				Type:     schema.TypeList,
-				Required: false
-			}
 		}
 	}
 }
