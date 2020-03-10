@@ -22,8 +22,6 @@ func resourceAddress() *schema.Resource {
 			},
 			"prefix": &schema.Schema{
 				Type:     schema.TypeList,
-				Elem: &schema.Schema{Type: schema.TypeInt},
-				Default: []int{},
 				Required: false
 			}
 		}
