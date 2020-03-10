@@ -20,6 +20,14 @@ func resourceAddress() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"prefix": &schema.Schema{
+				Type:     schema.TypeList,
+				Elem: &schema.Schema{
+					Type: schema.TypeInt
+				},
+				Default: []int{},
+				Required: false
+			},
 		},
 	}
 }
@@ -33,6 +41,19 @@ func resourceAddressCreate(d *schema.ResourceData, m interface{}) error {
 	_, err := rand.Read(buf)
 	if err != nil {
 		return errwrap.Wrapf("error generating random bytes: {{err}}", err)
+	}
+
+	prefix := d.Get("prefix").([]int)
+
+	if len(prefix) > MAC_ADDRESS_LENGTH {
+		return errwrap.Wrapf("error generating random mac address: prefix is too large (> %d)", MAC_ADDRESS_LENGTH)
+	}
+
+	for index, val := range prefix {
+		if val > 255 {
+			return errwarp.Wrapf("error generating random mac address: prefix segment must be in the range [0,256)")
+		}
+		buf[index] = byte(val)
 	}
 
 	// Locally administered
