@@ -26,7 +26,6 @@ func resourceAddress() *schema.Resource {
 				Elem: &schema.Schema{
 					Type:     schema.TypeInt,
 				},
-				Default: []int{},
 				Optional: true,
 				ForceNew: true,
 			},
