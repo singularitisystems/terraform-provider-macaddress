@@ -51,10 +51,10 @@ func resourceAddressCreate(d *schema.ResourceData, m interface{}) error {
 	}
 
 	for index, val := range prefix {
-		if int(val) > 255 {
+		if val.(int) > 255 {
 			return errors.New("error generating random mac address: prefix segment must be in the range [0,256)")
 		}
-		buf[index] = byte(int(val))
+		buf[index] = byte(val.(int))
 	}
 
 	// Locally administered
