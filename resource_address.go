@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"fmt"
 	"strings"
+        "errors"
 
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
@@ -38,12 +39,12 @@ func resourceAddressCreate(d *schema.ResourceData, m interface{}) error {
 	prefix := d.Get("prefix").([]int)
 
 	if len(prefix) > MAC_ADDRESS_LENGTH {
-		return "error generating random mac address: prefix is too large"
+		return errors.New("error generating random mac address: prefix is too large")
 	}
 
 	for index, val := range prefix {
 		if val > 255 {
-			return "error generating random mac address: prefix segment must be in the range [0,256)"
+			return errors.New("error generating random mac address: prefix segment must be in the range [0,256)")
 		}
 		buf[index] = byte(val)
 	}
