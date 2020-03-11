@@ -28,6 +28,7 @@ func resourceAddress() *schema.Resource {
 				},
 				Default: []int{},
 				Required: false,
+				ForceNew: true,
 			},
 		},
 	}
