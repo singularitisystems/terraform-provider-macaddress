@@ -21,6 +21,14 @@ func resourceAddress() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"prefix": &schema.Schema{
+				Type:     schema.TypeList,
+				Elem: &schema.Schema{
+					Type:     schema.TypeInt,
+				},
+				Default: []int{},
+				Required: false,
+			},
 		},
 	}
 }
